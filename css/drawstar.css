@@ -1,0 +1,4 @@
+.drawStar{width: 141px;height: 28px;overflow: hidden;background: url(<!--#echo var="static"-->images/mod/star.gif) repeat-x 0 -32px;}
+.drawStar li{width: 14px;height: 30px;float: left;;background-position: 0 0;}
+.drawStar li.halfStar{background-position: -14px 0;}
+.drawStar li.lightstar{background-image:  url(<!--#echo var="static"-->images/mod/star.gif);}
