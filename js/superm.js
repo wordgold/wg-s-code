@@ -50,7 +50,14 @@ define(function(require, exports, module) {
 			length: 2
 		},
 		subOpt: {
-
+			name: "",
+			hid: "",
+			suburl: "",
+			unSuburl: "",
+			sendMCode: "",
+			sendECode: "",
+			mobile: "",
+			email: ""
 		},
 		talkOpt: {
 
@@ -70,8 +77,7 @@ define(function(require, exports, module) {
 						var f = 'http://share.renren.com/share/buttonshare.do?link=',
 							u = d.location,
 							l = d.title,
-							p = [
-							e(u), '&title=', e(l)].join('');
+							p = [e(u), '&title=', e(l)].join('');
 
 						function a() {
 							if (!window.open([f, p].join(''), 'xnshare', ['toolbar=0,status=0,resizable=1,width=626,height=436,left=', (s.width - 626) / 2, ',top=', (s.height - 436) / 2].join(''))) u.href = [f, p].join('');
@@ -210,55 +216,131 @@ define(function(require, exports, module) {
 			if (mod.index != "share") mod.openMod("share");
 			else mod.closeMod();
 		},
-		sub: function() {
-			var opt = mod.mobileOpt;
+		sub: function(op) {
+			var opt = mod.subOpt;
+			console.log(opt);
 			if (!$("#smsub").length) {
-				$superM.append('<div id="smsub" class="smpanl"><h3 class="panlT"><a href="javascript:" class="fr">&times;</a>订阅房源信息</h3><form id="addSubForm"><ul><li><b>订阅 ' + opt.name + ' 的通知服务</b></li><li>留下您的手机或邮箱，如果 <b>' + opt.name + '</b> 有最新楼盘消息或价格变动，我们会第一时间通知您</li><li>请选择订阅服务:</li><li><input name="subprice" id="subprice" type="checkbox" class="checkbox" value="1"><label for="subprice">价格变动通知</label><input name="subinfo" id="subinfo" type="checkbox" class="checkbox" value="2"><label for="subinfo">楼盘最新消息</label></li><li>请输入您的手机号码或邮箱地址：</li><li><input type="text" id="subval"></li><li>请输入您收到的验证码：</li><li><input type="text" id="dyencode" style="width:80px"> &nbsp; <a href="javascript:" class="red">点击免费获取验证码</a></li><li><a href="javascript:" class="lightbtn addSubBtn">订 &nbsp; 阅</a><a href="javascript:" class="lightbtn showUnSub">退订该楼盘通知</a></li></ul></form><form id="unSubForm" style="display:none"><ul><li><b>退订' + opt.name + '的通知服务</b></li><li>请选择退订服务:</li><li><input name="unprice" id="unprice" type="checkbox" class="checkbox" value="1"><label for="unprice">价格变动通知</label><input name="uninfo" id="uninfo" type="checkbox" class="checkbox" value="2"><label for="uninfo">楼盘最新消息</label></li><li>请输入您订阅时的手机号码或邮箱地址：</li><li><input type="text" id="unsubval"></li><li>请输入您收到的验证码：</li><li><input type="text" name="mobile" id="undyencode" style="width:80px"> &nbsp; <a href="javascript:" class="red">点击免费获取验证码</a></li><li><a href="javascript:" class="lightbtn unSubBtn">退 &nbsp; 订</a><a href="javascript:" class="lightbtn showSub">返回订阅</a></li></ul></form></div>');
-				var $sub = $("#smsub"),
-					$sf = $("#addSubForm"),
-					$uf = $("#unSubForm"),
-					$sp = $("#subprice"),
-					$si = $("#subinfo"),
-					$up = $("#unprice"),
-					$ui = $("#uninfo"),
-					$sv = $("#subval"),
-					$se = $("#dyencode"),
+				var html = '<div id="smsub" class="smpanl"><h3 class="panlT"><a href="javascript:" class="fr">&times;</a>订阅房源信息</h3><form id="subForm"><input type="hidden" value="' + opt.hid + '" name="hid"><ul><li><b>订阅 ' + opt.name + ' 的通知服务</b></li><li>留下您的手机或邮箱，如果 <b>' + opt.name + '</b> 有最新楼盘消息或价格变动，我们会第一时间通知您</li><li>请选择订阅服务：<input name="subprice" id="subprice" type="checkbox" class="checkbox" value="1"><label for="subprice">价格变动通知</label><input name="subinfo" id="subinfo" type="checkbox" class="checkbox" value="2"><label for="subinfo">楼盘最新消息</label></li><li>';
+				if (opt.mobile) html += '您已绑定手机号码， <a href="javascript:" class="red subchange">使用电子邮箱订阅</a></li><li><input type="text" id="subval" value="' + opt.mobile + '" readonly></li>';
+				else if (opt.email) html += '您已绑定电子邮箱， <a href="javascript:" class="red subchange">使用手机订阅</a></li><li><input type="text" id="subval" value="' + opt.email + '" readonly></li>';
+				else html += '请输入您的手机号码或邮箱地址：</li><li><input type="text" id="subval"></li><li>请输入您收到的验证码：</li><li><input type="text" id="dyencode" name="encode" style="width:80px"> &nbsp; <a href="javascript:" class="red sendCode">点击免费获取验证码</a></li>'
+				$superM.append(html + '<li><a href="javascript:" class="lightbtn subBtn">订 &nbsp; 阅<button type="submit"/></a><a href="javascript:" class="lightbtn showUnSub">退订该楼盘通知</a></li></ul></form><form id="unSubForm" style="display:none"><input type="hidden" value="' + opt.hid + '" name="hid"><ul><li><b>退订' + opt.name + '的通知服务</b></li><li>请选择退订服务:<input name="unprice" id="unprice" type="checkbox" class="checkbox" value="1"><label for="unprice">价格变动通知</label><input name="uninfo" id="uninfo" type="checkbox" class="checkbox" value="2"><label for="uninfo">楼盘最新消息</label></li><li>请输入您订阅时的手机号码或邮箱地址：</li><li><input type="text" id="unsubval"></li><li>请输入您收到的验证码：</li><li><input type="text" name="encode" id="undyencode" style="width:80px"> &nbsp; <a href="javascript:" class="red sendCode">点击免费获取验证码</a></li><li><a href="javascript:" class="lightbtn unSubBtn">退 &nbsp; 订</a><a href="javascript:" class="lightbtn showSub">返回订阅</a></li></ul></form></div>');
+				var $sv = $("#subval"),
 					$uv = $("#unsubval"),
-					$ue = $("#undyencode");
-				var check = function($f, $m, $e) {
-					if (!$f.find("input:checked").length) alertM("请至少选择一项订阅内容", {
-						cName: 'error'
-					});
-					else if (!(/^1[3458]\d{9}$/.test($m.val()) || /^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/.test($m.val()))) alertM("请填写正确的手机号码或邮箱地址", {
-						cName: 'error',
-						rf: function() {
-							$m.focus();
+					mOrE = function($s) {
+						if (/^1[3458]\d{9}$/.test($s.val())) $s.attr("name", "mobile");
+						else if (/^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/.test($s.val())) $s.attr("name", "email");
+						else {
+							alertM("请填写正确的手机号码或邮箱地址", {
+								cName: 'error',
+								rf: function() {
+									$s.focus();
+								}
+							});
+							return false;
 						}
-					});
-					else if ($e.val() == "") alertM("请填写验证码", {
-						cName: 'error',
-						rf: function() {
-							$e.focus();
+						return true;
+					},
+					sendCode = function($t, $f, $v) {
+						if (mOrE($v)) $.ajax({
+							url: opt.sendurl,
+							dataType: "json",
+							data: $f.serialize()
+						}).done(function(data) {
+							if (data.state == "succ") {
+								$t.removeAttr("class").html("等待120秒后可以再次点击");
+								var i = 119;
+								var setin = setInterval(function() {
+									$t.html("等待" + i + "秒后可以再次点击")
+									if (--i < 0) {
+										$t.attr("class", "red sendCode").html("点击免费获取验证码");
+										clearInterval(setin);
+									}
+								}, 999)
+							}
+							alertM(data.alert, {
+								cName: data.state
+							})
+						}).fail(function() {
+							alertM(name + "失败，请检查网络连接是否已断开", {
+								cName: 'error'
+							});
+						})
+					},
+					check = function(url, name, $f, $s, $e) {
+						if (!$f.find("input:checked").length) alertM("请至少选择一项订阅内容", {
+							cName: 'error'
+						});
+						else if (mOrE($s)) {
+							if ($e.length && $e.val() == "") alertM("请填写验证码", {
+								cName: 'error',
+								rf: function() {
+									$e.focus();
+								}
+							});
+							else $.ajax({
+								url: url,
+								dataType: "json",
+								data: $f.serialize()
+							}).done(function(data) {
+								if (data.state == "succ") mod.close();
+								alertM(data.alert, {
+									cName: data.state
+								})
+							}).fail(function() {
+								alertM(name + "失败，请检查网络连接是否已断开", {
+									cName: 'error'
+								});
+							})
 						}
-					});
-					else return true;
-					return false;
-				}
-				$sub.on("click", "a.showUnSub", function() {
+						return false
+					};
+				var $sf = $("#subForm").on("submit", function() {
+					return check(opt.suburl, "订阅", $sf, $sv, $("#dyencode"))
+				}).on("click", "a.subBtn", function() {
+					$sf.trigger("submit");
+				}).on("click", "a.sendCode", function() {
+					sendCode($(this), $sf, $sv);
+				}).on("click", "a.showUnSub", function() {
 					$sf.slideUp();
 					$uf.slideDown();
+				}).on("click", "a.subchange", function() {
+					var $t = $(this).parent();
+					if (opt.mobile && opt.email) {
+						$sv.val(opt.email);
+						$t.html('您已绑定电子邮箱， <a href="javascript:" class="red subreturn">返回</a>')
+					} else {
+						$sv.removeAttr("readonly").val("").parent().after('<li class="crb">请输入您收到的验证码：</li><li class="crb"><input type="text" id="dyencode" name="encode" style="width:80px"> &nbsp; <a href="javascript:" class="red sendCode">点击免费获取验证码</a></li>');
+						$t.html('请输入您的' + (opt.email ? '手机号码' : '邮箱') + '号码， <a href="javascript:" class="red subreturn">返回</a>')
+					}
+				}).on("click", "a.subreturn", function() {
+					$sf.find('li.crb').remove();
+					$sv.prop("readonly", true);
+					var $t = $(this).parent();
+					if (opt.mobile) {
+						$t.html('您已绑定手机号码， <a href="javascript:" class="red subchange">使用电子邮箱订阅</a>')
+						$sv.val(opt.mobile);
+					} else {
+						$t.html('您已绑定电子邮箱， <a href="javascript:" class="red subchange">使用手机订阅</a>')
+						$sv.val(opt.email);
+					}
+
+				});
+				var $uf = $("#unSubForm").on("submit", function() {
+					return check(opt.unSuburl, "退订", $uf, $uv, $("#undyencode"))
+				}).on("click", "a.unSubBtn", function() {
+					$uf.trigger("submit");
+				}).on("click", "a.sendCode", function() {
+					sendCode($(this), $uf, $uv);
 				}).on("click", "a.showSub", function() {
 					$uf.slideUp();
 					$sf.slideDown();
-				}).on("click", "a.addSubBtn", function() {
-					if (check($sf, $sv, $se)) alertM("订阅失败，请检查网络连接是否已断开", {
-						cName: 'error'
-					});
-				}).on("click", "a.unSubBtn", function() {
-					if (check($uf, $uv, $ue)) alertM("退订失败，请检查网络连接是否已断开", {
-						cName: 'error'
-					});
-				})
+				});
+			}
+			if (op) {
+				$("#sub" + op.type).prop("checked", true).siblings().prop("checked", false);
+				if (mod.index != "sub") mod.sendInfo(op.t, "info");
+				else return;
 			}
 			if (mod.index != "sub") mod.openMod("sub");
 			else mod.closeMod();
@@ -287,12 +369,12 @@ define(function(require, exports, module) {
 							}
 						}).done(function(data) {
 							if (data.state == "succ") {
-								$t.attr("class", "dywaite").html("等待120秒后可以再次点击");
+								$t.removeAttr("class").html("等待120秒后可以再次点击");
 								var i = 119;
 								var setin = setInterval(function() {
 									$t.html("等待" + i + "秒后可以再次点击")
 									if (--i < 0) {
-										$t.attr("class", "dycheck").html("点击免费获取验证码");
+										$t.attr("class", "red").html("点击免费获取验证码");
 										clearInterval(setin);
 									}
 								}, 999)
@@ -347,8 +429,8 @@ define(function(require, exports, module) {
 					if (e.which < 48 || e.which > 105 || (e.which > 57 && e.which < 96)) return false;
 				})
 			}
-			if(op){
-				if(mod.index != "mobile") mod.sendInfo(op.t,"info");
+			if (op) {
+				if (mod.index != "mobile") mod.sendInfo(op.t, "info");
 				else return;
 			}
 			if (mod.index != "mobile") mod.openMod("mobile");
@@ -356,9 +438,9 @@ define(function(require, exports, module) {
 		},
 		pk: function(opt) {
 			var pkOpt = mod.pkOpt;
-			var s='<li>请先选择需要对比的'+pkOpt.name+'<br>最多可同时对比' + pkOpt.length + '个'+pkOpt.name+'</li><li><a href="javascript:" class="db lightbtn">对比'+pkOpt.name+'</a><a class="qk lightbtn" href="javascript:">清空'+pkOpt.name+'</a></li>';
+			var s = '<li>请先选择需要对比的' + pkOpt.name + '<br>最多可同时对比' + pkOpt.length + '个' + pkOpt.name + '</li><li><a href="javascript:" class="db lightbtn">对比' + pkOpt.name + '</a><a class="qk lightbtn" href="javascript:">清空' + pkOpt.name + '</a></li>';
 			if (!$("#smpk").length) {
-				$superM.append('<div id="smpk" class="smpanl"><h3 class="panlT"><a href="javascript:" class="fr">&times;</a>对比'+pkOpt.name+'信息</h3><ul>'+s+'</ul></div>')
+				$superM.append('<div id="smpk" class="smpanl"><h3 class="panlT"><a href="javascript:" class="fr">&times;</a>对比' + pkOpt.name + '信息</h3><ul>' + s + '</ul></div>')
 				var $pk = $("#smpk");
 				$pk.on("click", "em", function() {
 					$(this).parent().remove();
@@ -370,7 +452,7 @@ define(function(require, exports, module) {
 				}).on("click", "a.db", function() {
 					if ($pk.find("li").length > 3) {
 						var href = [];
-						$pk.find("a").slice(0,-2).each(function() {
+						$pk.find("a").slice(0, -2).each(function() {
 							href.push($(this).attr("data-val"))
 						});
 						setTimeout(function() {
@@ -418,11 +500,11 @@ define(function(require, exports, module) {
 			if (mod.index != "talk") mod.openMod("talk");
 			else mod.closeMod();
 		},
-		sendInfo: function(opt,c){
-			c = c?c:"";
+		sendInfo: function(opt, c) {
+			c = c ? c : "";
 			var o = $(opt).offset(),
 				o1 = $superM.offset();
-			var $info = $("<div class='sendInfo "+c+"'></div>").appendTo("body").css({
+			var $info = $("<div class='sendInfo " + c + "'></div>").appendTo("body").css({
 				left: o.left,
 				top: o.top
 			}).animate({
@@ -486,7 +568,7 @@ define(function(require, exports, module) {
 				html += mod.html.open;
 				for (var i = 0, l = a.length; i < l; i++)
 				html += mod.html[a[i]];
-			} else if(a) html += mod.html[a];
+			} else if (a) html += mod.html[a];
 			mod.shareOpt = $.extend(mod.shareOpt, opt.share || {});
 			mod.pkOpt = $.extend(mod.pkOpt, opt.pk || {});
 			mod.subOpt = $.extend(mod.subOpt, opt.sub || {});
@@ -503,15 +585,15 @@ define(function(require, exports, module) {
 				$smu.find("a").each(function(i) {
 					this.style.bottom = i * 64 + "px"
 				})
-				$superM = $("#superM").show().on("click","h3 a.fr",function(){
+				$superM = $("#superM").show().on("click", "h3 a.fr", function() {
 					mod.close();
 				});
 				mod.close();
-				if(!-[1,]&&!window.XMLHttpRequest){
-					$superM.css("position","absolute");
-					var $w=$(window).on('scroll',function(){
-						$superM.stop(true,false).animate({
-							top:$w.height()-$superM.height()+$w.scrollTop()
+				if (!-[1, ] && !window.XMLHttpRequest) {
+					$superM.css("position", "absolute");
+					var $w = $(window).on('scroll', function() {
+						$superM.stop(true, false).animate({
+							top: $w.height() - $superM.height() + $w.scrollTop()
 						})
 					});
 				}
