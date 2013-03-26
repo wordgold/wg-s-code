@@ -1,17 +1,15 @@
 ﻿html, body, div, span,object, iframe, h1, h2, h3, h4, h5, h6, p,a, em, img, strong, sub, sup, dl, dt, dd, ol, ul, li, form, label, embed,input,textarea,pre{margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;}
-body,input,textarea{font: 14px/1.625em Arial,Helvetica,sans-serif;color:#333;background:#fff;word-break: break-all;}
 body{padding: 99px;}
-h1,h3,h5{font-weight: bold;font-size: 24px;}
+h1,h3,h5{font-weight: bold;font-size: 24px;line-height: 1.625em;margin: 1.625em 0}
 h3{font-size: 16px;}
-h5{font-size: 14px;}
+body,input,textarea,h5{font: 14px/1.625em Arial,Helvetica,sans-serif;color:#333;background:#fff;word-break: break-all;}
 p,pre{margin: 9px;}
+b{background: #eee;padding: 0 2px}
 pre{border:1px #ccc solid;border-radius: 9px;box-shadow: 0 1px 3px #ccc inset;}
 script{display: block;}
-:focus {outline: 0;}
 ol, ul {list-style: none;}
 table {border-collapse: collapse;border-spacing: 0;}
-.cf:before,
-.cf:after {content: " ";display: table;}
+.cf:before,.cf:after {content: " ";display: table;}
 .cf:after{clear: both;}
 .cf{*zoom: 1;}
 a{color:#333;text-decoration:none;}
