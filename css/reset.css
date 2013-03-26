@@ -1,5 +1,5 @@
 ﻿html, body, div, span,object, iframe, h1, h2, h3, h4, h5, h6, p,a, em, img, strong, sub, sup, dl, dt, dd, ol, ul, li, form, label, embed,input,textarea,pre{margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;}
-body{padding: 99px;}
+body{padding: 99px;background: #f6f6f6}
 h1,h3,h5{font-weight: bold;font-size: 24px;line-height: 1.625em;margin: 1.625em 0;}
 h3{font-size: 16px;}
 body,input,textarea,h5{font: 14px/1.625em Arial,Helvetica,sans-serif;color:#333;background:#fff;word-break: break-all;}
