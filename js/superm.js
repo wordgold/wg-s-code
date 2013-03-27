@@ -218,23 +218,33 @@ define(function(require, exports, module) {
 		},
 		sub: function(op) {
 			var opt = mod.subOpt;
-			console.log(opt);
 			if (!$("#smsub").length) {
-				var html = '<div id="smsub" class="smpanl"><h3 class="panlT"><a href="javascript:" class="fr">&times;</a>订阅房源信息</h3><form id="subForm"><input type="hidden" value="' + opt.hid + '" name="hid"><ul><li><b>订阅 ' + opt.name + ' 的通知服务</b></li><li>留下您的手机或邮箱，如果 <b>' + opt.name + '</b> 有最新楼盘消息或价格变动，我们会第一时间通知您</li><li>请选择订阅服务：<input name="subprice" id="subprice" type="checkbox" class="checkbox" value="1"><label for="subprice">价格变动通知</label><input name="subinfo" id="subinfo" type="checkbox" class="checkbox" value="2"><label for="subinfo">楼盘最新消息</label></li><li>';
-				if (opt.mobile) html += '您已绑定手机号码， <a href="javascript:" class="red subchange">使用电子邮箱订阅</a></li><li><input type="text" id="subval" value="' + opt.mobile + '" readonly></li>';
-				else if (opt.email) html += '您已绑定电子邮箱， <a href="javascript:" class="red subchange">使用手机订阅</a></li><li><input type="text" id="subval" value="' + opt.email + '" readonly></li>';
-				else html += '请输入您的手机号码或邮箱地址：</li><li><input type="text" id="subval"></li><li>请输入您收到的验证码：</li><li><input type="text" id="dyencode" name="encode" style="width:80px"> &nbsp; <a href="javascript:" class="red sendCode">点击免费获取验证码</a></li>'
-				$superM.append(html + '<li><a href="javascript:" class="lightbtn subBtn">订 &nbsp; 阅<button type="submit"/></a><a href="javascript:" class="lightbtn showUnSub">退订该楼盘通知</a></li></ul></form><form id="unSubForm" style="display:none"><input type="hidden" value="' + opt.hid + '" name="hid"><ul><li><b>退订' + opt.name + '的通知服务</b></li><li>请选择退订服务:<input name="unprice" id="unprice" type="checkbox" class="checkbox" value="1"><label for="unprice">价格变动通知</label><input name="uninfo" id="uninfo" type="checkbox" class="checkbox" value="2"><label for="uninfo">楼盘最新消息</label></li><li>请输入您订阅时的手机号码或邮箱地址：</li><li><input type="text" id="unsubval"></li><li>请输入您收到的验证码：</li><li><input type="text" name="encode" id="undyencode" style="width:80px"> &nbsp; <a href="javascript:" class="red sendCode">点击免费获取验证码</a></li><li><a href="javascript:" class="lightbtn unSubBtn">退 &nbsp; 订</a><a href="javascript:" class="lightbtn showSub">返回订阅</a></li></ul></form></div>');
+				var h = ['<div id="smsub" class="smpanl"><h3 class="panlT"><a href="javascript:" class="fr">&times;</a>免费订阅通知服务</h3><form id="subForm">', '<input type="hidden" value="' + opt.hid + '" name="hid"><ul><li>', '留下您的手机或邮箱，如果 <b>' + opt.name + '</b> 有最新 <b>', '</b>，我们会第一时间通知您。', '请选择订阅服务：', '<form id="unSubForm" style="display:none">', '退订' + opt.name + '的通知服务', '请选择退订服务:', '</li><li>', '<input name="', '" id="', '" type="checkbox" class="checkbox" value="1"><label for="', '</label>', '您已绑定手机， <a href="javascript:" class="red subchange">使用电子邮箱</a>', '您已绑定电子邮箱， <a href="javascript:" class="red subchange">使用手机</a>', '请输入您的手机号码或邮箱地址：', '请输入您收到的验证码：', '<input type="text" id="', '" name="encode" style="width:80px', '" value="', '" readonly="readonly', '">', ' &nbsp; <a href="javascript:" class="red sendCode">点击免费获取验证码</a>', '<a href="javascript:" class="lightbtn subBtn">', '<button type="submit"/></a><a href="javascript:" class="lightbtn showUnSub">', '</a></li></ul></form>', '</div>', '<li class="crb">']
+				var html = h[0] + h[1] + h[2] + opt.c1 + h[3] + h[8] + h[4] + h[9] + 'c2' + h[10] + 'subc2' + h[11] + 'subc2' + h[21] + opt.c2 + h[12] + h[9] + 'c3' + h[10] + 'subc3' + h[11] + 'subc3' + h[21] + opt.c3 + h[12] + h[8],
+					unhtml = h[5] + h[1] + h[6] + h[8] + h[7] + h[9] + 'c2' + h[10] + 'unsubc2' + h[11] + 'unsubc2' + h[21] + opt.c2 + h[12] + h[9] + 'c3' + h[10] + 'unsubc3' + h[11] + 'unsubc3' + h[21] + opt.c3 + h[12] + h[8];
+				if (opt.mobile) {
+					html += h[13] + h[8] + h[17] + 'subval' + h[19] + opt.mobile + h[20] + h[21];
+					unhtml += h[13] + h[8] + h[17] + 'unsubval' + h[19] + opt.mobile + h[20] + h[21];
+				} else if (opt.email) {
+					html += h[14] + h[8] + h[17] + 'subval' + h[19] + opt.email + h[20] + h[21];
+					unhtml += h[14] + h[8] + h[17] + 'unsubval' + h[19] + opt.email + h[20] + h[21];
+				} else {
+					html += h[15] + h[8] + h[17] + 'subval' + h[19] + h[21] + h[8] + h[16] + h[8] + h[17] + 'dyencode' + h[18] + h[21] + h[22];
+					unhtml += h[15] + h[8] + h[17] + 'unsubval' + h[19] + h[21] + h[8] + h[16] + h[8] + h[17] + 'undyencode' + h[18] + h[21] + h[22];
+				}
+				html += h[8] + h[23] + '订 &nbsp 阅' + h[24] + h[6] + h[25];
+				unhtml += h[8] + h[23] + '退 &nbsp 订' + h[24] + '返回订阅' + h[25];
+				$superM.append(html + unhtml + h[26]);
 				var $sv = $("#subval"),
 					$uv = $("#unsubval"),
-					mOrE = function($s) {
-						if (/^1[3458]\d{9}$/.test($s.val())) $s.attr("name", "mobile");
-						else if (/^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/.test($s.val())) $s.attr("name", "email");
+					mOrE = function($v) {
+						if (/^1[3458]\d{9}$/.test($v.val())) $v.attr("name", "mobile");
+						else if (/^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/.test($v.val())) $v.attr("name", "email");
 						else {
 							alertM("请填写正确的手机号码或邮箱地址", {
 								cName: 'error',
 								rf: function() {
-									$s.focus();
+									$v.focus();
 								}
 							});
 							return false;
@@ -259,7 +269,10 @@ define(function(require, exports, module) {
 								}, 999)
 							}
 							alertM(data.alert, {
-								cName: data.state
+								cName: data.state,
+								rf: function() {
+									$t.prev().focus();
+								}
 							})
 						}).fail(function() {
 							alertM(name + "失败，请检查网络连接是否已断开", {
@@ -267,11 +280,11 @@ define(function(require, exports, module) {
 							});
 						})
 					},
-					check = function(url, name, $f, $s, $e) {
+					check = function(url, name, $f, $v, $e) {
 						if (!$f.find("input:checked").length) alertM("请至少选择一项订阅内容", {
 							cName: 'error'
 						});
-						else if (mOrE($s)) {
+						else if (mOrE($v)) {
 							if ($e.length && $e.val() == "") alertM("请填写验证码", {
 								cName: 'error',
 								rf: function() {
@@ -294,6 +307,26 @@ define(function(require, exports, module) {
 							})
 						}
 						return false
+					},
+					subChange = function($t, $v, id) {
+						if (opt.mobile && opt.email) {
+							$v.val(opt.email);
+							$t.html('您已绑定电子邮箱， <a href="javascript:" class="red subreturn">返回</a>')
+						} else {
+							$v.removeAttr("readonly").val("").parent().after(h[27] + h[16] + '</li>' + h[27] + h[17] + id + h[18] + h[21] + h[22] + '</li>');
+							$t.html('请输入您的' + (opt.email ? '手机号码' : '邮箱') + '号码， <a href="javascript:" class="red subreturn">返回</a>')
+						}
+					},
+					subreturn = function($t, $f, $v) {
+						$f.find('li.crb').remove();
+						$v.prop("readonly", true);
+						if (opt.mobile) {
+							$t.html(h[13])
+							$v.val(opt.mobile);
+						} else {
+							$t.html(h[14])
+							$v.val(opt.email);
+						}
 					};
 				var $sf = $("#subForm").on("submit", function() {
 					return check(opt.suburl, "订阅", $sf, $sv, $("#dyencode"))
@@ -305,36 +338,23 @@ define(function(require, exports, module) {
 					$sf.slideUp();
 					$uf.slideDown();
 				}).on("click", "a.subchange", function() {
-					var $t = $(this).parent();
-					if (opt.mobile && opt.email) {
-						$sv.val(opt.email);
-						$t.html('您已绑定电子邮箱， <a href="javascript:" class="red subreturn">返回</a>')
-					} else {
-						$sv.removeAttr("readonly").val("").parent().after('<li class="crb">请输入您收到的验证码：</li><li class="crb"><input type="text" id="dyencode" name="encode" style="width:80px"> &nbsp; <a href="javascript:" class="red sendCode">点击免费获取验证码</a></li>');
-						$t.html('请输入您的' + (opt.email ? '手机号码' : '邮箱') + '号码， <a href="javascript:" class="red subreturn">返回</a>')
-					}
+					subChange($(this).parent(), $sv, 'dyencode');
 				}).on("click", "a.subreturn", function() {
-					$sf.find('li.crb').remove();
-					$sv.prop("readonly", true);
-					var $t = $(this).parent();
-					if (opt.mobile) {
-						$t.html('您已绑定手机号码， <a href="javascript:" class="red subchange">使用电子邮箱订阅</a>')
-						$sv.val(opt.mobile);
-					} else {
-						$t.html('您已绑定电子邮箱， <a href="javascript:" class="red subchange">使用手机订阅</a>')
-						$sv.val(opt.email);
-					}
-
+					subreturn($(this).parent(), $sf, $sv);
 				});
 				var $uf = $("#unSubForm").on("submit", function() {
 					return check(opt.unSuburl, "退订", $uf, $uv, $("#undyencode"))
-				}).on("click", "a.unSubBtn", function() {
+				}).on("click", "a.subBtn", function() {
 					$uf.trigger("submit");
 				}).on("click", "a.sendCode", function() {
 					sendCode($(this), $uf, $uv);
-				}).on("click", "a.showSub", function() {
+				}).on("click", "a.showUnSub", function() {
 					$uf.slideUp();
 					$sf.slideDown();
+				}).on("click", "a.subchange", function() {
+					subChange($(this).parent(), $uv, 'undyencode');
+				}).on("click", "a.subreturn", function() {
+					subreturn($(this).parent(), $uf, $uv);
 				});
 			}
 			if (op) {
@@ -494,7 +514,7 @@ define(function(require, exports, module) {
 		talk: function() {
 			var opt = mod.mobileOpt;
 			if (!$("#smtalk").length) {
-				$superM.append('<div id="smtalk" class="smpanl"><h3 class="panlT"><a href="javascript:" class="fr">&times;</a>在线聊天</h3><div class="smcon"><div id="talkInfo"><a href="#" class="fl"><img src="<!--#echo var="static"-->images/test/180x180.jpg" alt="王志坤">王志坤</a><p>电话： 15511871706<br>QQ： 暂无<br>服务：裕华区 翟营大街<br>公司： <a href="#">21世纪</a><a href="#">海天阳光园店</a></p></div><ul id="talkContent"><li><h5>王志坤<span>下午 6:20</span></h5> 会把屏抓花不？ </li><li><h5>我<span>下午 6:21</span></h5> 不会<br> 小孩子指甲要能抓花华硕也不用做了 </li><li><h5>王志坤<span>下午 6:25</span></h5> 嗯嗯<br> 回头一起买n4a </li><li><h5>我<span>下午 6:25</span></h5> 好，不着急 </li><li><h5>王志坤<span>下午 6:20</span></h5> 会把屏抓花不？ </li><li><h5>我<span>下午 6:21</span></h5> 不会<br> 小孩子指甲要能抓花华硕也不用做了 </li><li><h5>王志坤<span>下午 6:25</span></h5> 嗯嗯<br> 回头一起买n4a </li><li><h5>我<span>下午 6:25</span></h5> 好，不着急 </li></ul><textarea id=""></textarea><a href="javascript:" class="lightbtn">发 &nbsp; 送</a></div></div>');
+				$superM.append('<div id="smtalk" class="smpanl"><h3 class="panlT"><a href="javascript:" class="fr">&times;</a>在线聊天</h3><div class="smcon"><div id="talkInfo" class="cf"><a href="#" class="fl"><img src="<!--#echo var="static"-->images/test/180x180.jpg" alt="王志坤">王志坤</a><p>电话： 15511871706<br>QQ： 暂无<br>服务：裕华区 翟营大街<br>公司： <a href="#">21世纪</a><a href="#">海天阳光园店</a></p></div><ul id="talkContent"><li><h5>王志坤<span>下午 6:20</span></h5> 会把屏抓花不？ </li><li><h5>我<span>下午 6:21</span></h5> 不会<br> 小孩子指甲要能抓花华硕也不用做了 </li><li><h5>王志坤<span>下午 6:25</span></h5> 嗯嗯<br> 回头一起买n4a </li><li><h5>我<span>下午 6:25</span></h5> 好，不着急 </li><li><h5>王志坤<span>下午 6:20</span></h5> 会把屏抓花不？ </li><li><h5>我<span>下午 6:21</span></h5> 不会<br> 小孩子指甲要能抓花华硕也不用做了 </li><li><h5>王志坤<span>下午 6:25</span></h5> 嗯嗯<br> 回头一起买n4a </li><li><h5>我<span>下午 6:25</span></h5> 好，不着急 </li></ul><textarea id=""></textarea><a href="javascript:" class="lightbtn">发 &nbsp; 送</a></div></div>');
 
 			}
 			if (mod.index != "talk") mod.openMod("talk");
