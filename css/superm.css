@@ -32,14 +32,11 @@
 #smpk li{padding: 9px;}
 #smpk .lightbtn{margin: 0 9px;}
 #smpk em{width: 26px;height: 26px;float:  right;background: url(<!--#echo var="static"-->images/mod/del.png);cursor: pointer;}
-#smmobile{width: 320px;}
+#smmobile,#smsub,#smtalk{width: 320px;}
 #smmobile ul,#smsub ul{padding: 0 9px;}
 #smmobile li.gray9{padding: 6px;word-break:break-all;}
-#smsub{width: 360px;}
-#smtalk{width: 380px;}
-#smtalk .smcon{width: 360px;padding: 0 9px 9px 0;}
-#smtalk textarea{width: 350px;height: 48px;padding: 0 4px;border:1px #ccc solid;border-radius: 3px;line-height: 1.4em;}
-#talkContent{height: 240px;width: 340px;overflow: auto;border:1px #ccc solid;border-radius: 3px;background: #eee;margin: 9px 0;padding: 0 9px;line-height: 1.6em}
+#smtalk textarea{width: 310px;height: 48px;padding: 0 4px;border:1px #ccc solid;border-radius: 3px;line-height: 1.4em;}
+#talkContent{height: 240px;overflow: auto;border:1px #ccc solid;border-radius: 3px;background: #eee;margin: 9px 0;padding: 0 9px;line-height: 1.6em}
 #talkContent li{border-top:1px #fff solid;border-bottom:1px #ccc solid;}
 #talkContent h5{color: #66a;line-height: 2em}
 #talkContent h5 span{float: right;}
