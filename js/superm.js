@@ -362,8 +362,11 @@ define(function(require, exports, module) {
 				if (mod.index != "sub") mod.sendInfo(op.t, "info");
 				else return;
 			}
-			if (mod.index != "sub") mod.openMod("sub");
-			else mod.closeMod();
+			if (mod.index != "sub") {
+				$("#unSubForm").hide();
+				$("#subForm").show();
+				mod.openMod("sub");
+			} else mod.closeMod();
 		},
 		mobile: function(op) {
 			opt = mod.mobileOpt;
@@ -472,8 +475,8 @@ define(function(require, exports, module) {
 				}).on("click", "a.db", function() {
 					if ($pk.find("li").length > 3) {
 						var href = [];
-						$pk.find("a").slice(0, -2).each(function() {
-							href.push($(this).attr("data-val"))
+						$pk.find("ul a").slice(0, -2).each(function() {
+							href.push($(this).attr("data-val"));
 						});
 						setTimeout(function() {
 							window.location.href = pkOpt.url + href.join("-") + "/";
