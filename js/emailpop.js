@@ -28,10 +28,9 @@ define(function(require, exports, module) {
 		return $(this).attr("autocomplete", "off").each(function() {
 			var $t = $(this).on({
 				focus: function() {
-					$bind = $t;
+					$bind = $t.trigger("keydown");
 					resize();
 					$(window).on("resize", resize);
-					$t.trigger("keydown");
 				},
 				keydown: function(e) {
 					switch (e.which) {
