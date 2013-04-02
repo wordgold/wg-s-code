@@ -388,7 +388,8 @@ define(function(require, exports, module) {
 							url: opt.checkurl,
 							dataType: 'jsonp',
 							data: {
-								mobile: $m.val()
+								mobile: $m.val(),
+								id: opt.hid
 							}
 						}).done(function(data) {
 							if (data.state == "succ") {
@@ -582,22 +583,24 @@ define(function(require, exports, module) {
 			});
 			mod.state = 0;
 		},
-		start: function(a, opt) {
+		start: function(a) {
 			require('cookie');
 			require('<!--#echo var="static"-->css/mod/superm.css');
 			mod = module.exports;
 			var html = mod.html.start;
-			if (Object.prototype.toString.apply(a) === '[object Array]') {
-				html += mod.html.open;
-				for (var i = 0, l = a.length; i < l; i++)
-				html += mod.html[a[i]];
-			} else if (a) html += mod.html[a];
-			mod.shareOpt = $.extend(mod.shareOpt, opt.share || {});
-			mod.pkOpt = $.extend(mod.pkOpt, opt.pk || {});
-			mod.subOpt = $.extend(mod.subOpt, opt.sub || {});
-			mod.talkOpt = $.extend(mod.talkOpt, opt.talk || {});
-			mod.mobileOpt = $.extend(mod.mobileOpt, opt.mobile || {});
+			if ($.isArray(a)) {
+				var i = 0,
+					l = a.length,
+					t;
+				if (l > 1) html += mod.html.open;
+				for (; i < l; i++) {
+					t = a[i];
+					html += mod.html[t.name];
+					mod[t.name + "Opt"] = $.extend(mod[t.name + "Opt"], t.opt || {});
+				}
+			}
 			$(function() {
+				if ($superM) $superM.remove();
 				$("body").append(html + mod.html.end);
 				$smu = $("#smu").on("click", "a", function() {
 					if ($(this).index() > 0) mod.open($(this).attr("data-event"));
