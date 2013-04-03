@@ -314,7 +314,7 @@ define(function(require, exports, module) {
 							$t.html('您已绑定电子邮箱， <a href="javascript:" class="red subreturn">返回</a>')
 						} else {
 							$v.removeAttr("readonly").val("").parent().after(h[27] + h[16] + '</li>' + h[27] + h[17] + id + h[18] + h[21] + h[22] + '</li>');
-							$t.html('请输入您的' + (opt.email ? '手机号码' : '邮箱') + '号码， <a href="javascript:" class="red subreturn">返回</a>')
+							$t.html('请输入您的' + (opt.email ? '手机号码' : '电子邮箱') + '， <a href="javascript:" class="red subreturn">返回</a>')
 						}
 					},
 					subreturn = function($t, $f, $v) {
