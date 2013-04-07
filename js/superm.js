@@ -611,9 +611,9 @@ define(function(require, exports, module) {
 				$smu.find("a").each(function(i) {
 					this.style.bottom = i * 64 + "px"
 				})
-				$superM = $("#superM").show().on("click", "h3 a.fr", function() {
+				$superM = $("#superM").on("click", "h3 a.fr", function() {
 					mod.close();
-				});
+				}).css("display", "block");
 				mod.close();
 				if (!-[1, ] && !window.XMLHttpRequest) {
 					$superM.css("position", "absolute");

@@ -81,10 +81,7 @@ define(function(require, exports, module) {
 			});
 			try {
 				var touch = function() {
-					$a.css("position", "absolute").animate({
-						top: $w.scrollTop(),
-						left: $w.scrollLeft()
-					});
+					if (!opt.cName) $a.css("position", "absolute");
 					document.removeEventListener('touchend', touch, false);
 				}
 				document.addEventListener("touchend", touch, false);
