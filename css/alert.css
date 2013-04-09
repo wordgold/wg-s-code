@@ -30,3 +30,14 @@
 .alert #alertP{background-image: url(<!--#echo var="static"-->images/mod/alert.png);}
 .cross #alertP{background-image: url(<!--#echo var="static"-->images/mod/cross.png);}
 .error #alertP{background-image: url(<!--#echo var="static"-->images/mod/error.png);}
+#alertM li{padding: 4px 0;}
+#alertM li span{display: inline-block;width: 72px;float: left;margin: 2px 0 0 0;text-align: right;}
+#alertM input,#alertM textarea{height: 24px;line-height: 24px;width: 160px;font-size: 12px;color: #666;}
+#alertM textarea{height: 72px;width: 240px;}
+#alertM li#minfo{text-align: center;color: #f00;}
+#alertM input.radio{width: 20px;height: 20px;vertical-align: middle;border:0;}
+#mobilea {padding: 0 0 0 140px;background: url(<!--#echo var="static"-->images/xinfang/mobilea.png) no-repeat 0 32px;}
+#saveToDesk,#saveToFav,#saveToCopy{padding: 0 0 0 24px;background: url(<!--#echo var="static"-->images/mod/fav.gif) no-repeat 0 2px;}
+#saveToFav{background-position: 0 -20px;}
+#saveToCopy{background-position: 0 -42px;}
+#saveToCopy.hover{color: #f00;text-decoration: underline;}

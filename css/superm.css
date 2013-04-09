@@ -1,4 +1,4 @@
-#superM{display: none;position: fixed;right: 0;bottom: 0;}
+#superM{display: none;position: fixed;right: 0;bottom: 0;z-index: 19;}
 #smu{position: absolute;bottom: 16px;right: 16px;z-index: 80}
 #smu a{display: block;position: absolute;right: 27px;bottom: 0;height:54px;width: 0;background-image: url(<!--#echo var="static"-->images/mod/super.png);_background-image: url(<!--#echo var="static"-->images/mod/super-ie6.gif);background-position: 0 -594px;background-repeat: repeat-x;cursor: pointer;-webkit-transition:width 0.2s ease-out;-moz-transition:width 0.2s ease-out;-o-transition:width 0.2s ease-out;transition:width 0.2s ease-out}
 #smu a:hover{width: 54px;_padding:0 0 0 12px;color: #000;text-decoration: none}
@@ -17,8 +17,8 @@
 #mobileBtn i{background-position: 0 -270px;}
 #pkBtn i{background-position: 0 -216px;}
 #talkBtn i{background-position: 0 -162px;}
-.sendInfo{display: none;position: absolute;width: 128px;height: 128px;background:url(<!--#echo var="static"-->images/mod/home.png);background:url(<!--#echo var="static"-->images/mod/home.gif);}
-.sendInfo.info{background:url(<!--#echo var="static"-->images/mod/java.png);background:url(<!--#echo var="static"-->images/mod/java.gif);}
+.sendInfo{display: none;position: absolute;width: 128px;height: 128px;background:url(<!--#echo var="static"-->images/mod/home.png);_background:url(<!--#echo var="static"-->images/mod/home.gif);z-index: 29;}
+.sendInfo.info{background:url(<!--#echo var="static"-->images/mod/java.png);_background:url(<!--#echo var="static"-->images/mod/java.gif);}
 .smpanl{display: none;position: absolute;bottom: 0;right: 75px;background: #f6f6f6;box-shadow: 0 3px 9px #ccc;border-radius: 5px;padding: 9px;border: 1px #ddd solid;font-size: 12px;line-height: 2em;}
 .smpanl .panlT{margin: 0 0 9px 0;}
 .smpanl .lightbtn{margin: 9px 18px 0 0}
@@ -31,7 +31,8 @@
 #smpk ul{padding: 0 9px 9px 0;text-align: center;}
 #smpk li{padding: 9px;}
 #smpk .lightbtn{margin: 0 9px;}
-#smpk em{width: 26px;height: 26px;float:  right;background: url(<!--#echo var="static"-->images/mod/del.png);cursor: pointer;}
+#smpk em{width: 26px;height: 26px;float:  right;background-image: url(<!--#echo var="static"-->images/mod/super.png);_background-image: url(<!--#echo var="static"-->images/mod/super-ie6.gif);background-position:  -14px -122px;cursor: pointer;}
+#smpk em:hover{background-position: -14px -68px}
 #smmobile,#smsub,#smtalk{width: 320px;}
 #smmobile ul,#smsub ul{padding: 0 9px;}
 #smmobile li.gray9{padding: 6px;word-break:break-all;}

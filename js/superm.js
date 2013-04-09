@@ -1,6 +1,8 @@
 define(function(require, exports, module) {
 	require('jquery');
-	var $superM, $smu, mod, alertM = require('alert');
+	require('cookie');
+	require('<!--#echo var="static"-->css/mod/superm.css');	
+	var $superM, $smu, $sma, mod, alertM = require('alert');
 	return {
 		html: {
 			start: '<div id="superM"><div id="smu" class="on"><a id="goTopBtn" href="javascript:" title="返回顶部"><i></i><s></s><u></u><span>返回顶部</span></a>',
@@ -254,7 +256,7 @@ define(function(require, exports, module) {
 					sendCode = function($t, $f, $v) {
 						if (mOrE($v)) $.ajax({
 							url: opt.sendurl,
-							dataType: "json",
+							dataType: "jsonp",
 							data: $f.serialize()
 						}).done(function(data) {
 							if (data.state == "succ") {
@@ -278,7 +280,8 @@ define(function(require, exports, module) {
 							alertM(name + "失败，请检查网络连接是否已断开", {
 								cName: 'error'
 							});
-						})
+						});
+						return false;
 					},
 					check = function(url, name, $f, $v, $e) {
 						if (!$f.find("input:checked").length) alertM("请至少选择一项订阅内容", {
@@ -306,7 +309,7 @@ define(function(require, exports, module) {
 								});
 							})
 						}
-						return false
+						return false;
 					},
 					subChange = function($t, $v, id) {
 						if (opt.mobile && opt.email) {
@@ -333,7 +336,7 @@ define(function(require, exports, module) {
 				}).on("click", "a.subBtn", function() {
 					$sf.trigger("submit");
 				}).on("click", "a.sendCode", function() {
-					sendCode($(this), $sf, $sv);
+					return sendCode($(this), $sf, $sv);
 				}).on("click", "a.showUnSub", function() {
 					$sf.slideUp();
 					$uf.slideDown();
@@ -347,7 +350,7 @@ define(function(require, exports, module) {
 				}).on("click", "a.subBtn", function() {
 					$uf.trigger("submit");
 				}).on("click", "a.sendCode", function() {
-					sendCode($(this), $uf, $uv);
+					return sendCode($(this), $uf, $uv);
 				}).on("click", "a.showUnSub", function() {
 					$uf.slideUp();
 					$sf.slideDown();
@@ -366,6 +369,7 @@ define(function(require, exports, module) {
 				$("#unSubForm").hide();
 				$("#subForm").show();
 				mod.openMod("sub");
+				$("#subval").trigger("focus");
 			} else mod.closeMod();
 		},
 		mobile: function(op) {
@@ -412,6 +416,7 @@ define(function(require, exports, module) {
 							});
 						});
 					}
+					return false;
 				}).on("click", "a.send", function() {
 					if (!/^1[3458]\d{9}$/.test($m.val())) {
 						alertM("请填写正确的手机号码格式", {
@@ -447,6 +452,7 @@ define(function(require, exports, module) {
 							});
 						});
 					}
+					return false;
 				})
 				$m.keydown(function(e) {
 					if (e.which == 9 || e.which == 8) return;
@@ -457,8 +463,10 @@ define(function(require, exports, module) {
 				if (mod.index != "mobile") mod.sendInfo(op.t, "info");
 				else return;
 			}
-			if (mod.index != "mobile") mod.openMod("mobile");
-			else mod.closeMod();
+			if (mod.index != "mobile"){
+				mod.openMod("mobile");
+				$("#dymobile").trigger("focus");
+			}else mod.closeMod();
 		},
 		pk: function(opt) {
 			var pkOpt = mod.pkOpt;
@@ -563,7 +571,8 @@ define(function(require, exports, module) {
 			if (mod.state) {
 				if (!a) mod.close();
 			} else {
-				$smu.addClass("on").find("a:gt(1)").each(function(i) {
+				$smu.addClass("on");
+				$sma.each(function(i) {
 					$(this).stop().animate({
 						bottom: (i + 2) * 64,
 						opacity: "show"
@@ -575,7 +584,7 @@ define(function(require, exports, module) {
 		},
 		close: function() {
 			if (mod.index) mod.closeMod();
-			$smu.find("a:gt(1)").stop().animate({
+			$sma.stop().animate({
 				bottom: 64,
 				opacity: "hide"
 			}, function() {
@@ -584,8 +593,6 @@ define(function(require, exports, module) {
 			mod.state = 0;
 		},
 		start: function(a) {
-			require('cookie');
-			require('<!--#echo var="static"-->css/mod/superm.css');
 			mod = module.exports;
 			var html = mod.html.start;
 			if ($.isArray(a)) {
@@ -608,13 +615,16 @@ define(function(require, exports, module) {
 						scrollTop: 0
 					})
 				});
-				$smu.find("a").each(function(i) {
+				$sma = $smu.find("a").each(function(i) {
 					this.style.bottom = i * 64 + "px"
-				})
+				}).slice(2);
 				$superM = $("#superM").on("click", "h3 a.fr", function() {
 					mod.close();
-				}).css("display", "block");
-				mod.close();
+				}).animate({
+					opacity: "show"
+				}, function() {
+					mod.close();
+				});
 				if (!-[1, ] && !window.XMLHttpRequest) {
 					$superM.css("position", "absolute");
 					var $w = $(window).on('scroll', function() {

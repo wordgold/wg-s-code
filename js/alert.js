@@ -1,6 +1,5 @@
 define(function(require, exports, module) {
 	require('jquery');
-	require('drag');
 	require('<!--#echo var="static"-->css/mod/alert.css');
 	var amrt = 0;
 	return function(content, opt) {
