@@ -16,15 +16,9 @@ define(function(require, exports, module) {
 			cName: '',
 			iframe: 0,
 			of: function() {},
-			cf: function() {
-				return 1
-			},
-			yf: function() {
-				return 1
-			},
-			nf: function() {
-				return 1
-			},
+			cf: function() {},
+			yf: function() {},
+			nf: function() {},
 			rf: function() {}
 		}, opt || {});
 		var $w = $(window),
@@ -67,7 +61,7 @@ define(function(require, exports, module) {
 				});
 				$w.bind('scroll', function() {
 					$a.css({
-						top: c + $w.scrollTop()
+						top: ($w.height() - $a.height()) / 2 + $w.scrollTop()
 					});
 				});
 			}
@@ -86,11 +80,14 @@ define(function(require, exports, module) {
 				document.addEventListener("touchend", touch, false);
 			} catch (e) {}
 			if (!opt.cName) $a.on("click", "#alertR", function() {
-				if (opt.cf()) opt.r()
+				if (!(opt.cf() == false)) opt.r();
+				return false;
 			}).on("click", "#alertY", function() {
-				if (opt.yf()) opt.r();
+				if (!(opt.yf() == false)) opt.r();
+				return false;
 			}).on("click", "#alertN", function() {
-				if (opt.nf()) opt.r();
+				if (!(opt.nf() == false)) opt.r();
+				return false;
 			})
 			opt.of();
 		}

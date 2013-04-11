@@ -23,7 +23,7 @@
 #alertM.off{-webkit-backface-visibility: visible !important;-webkit-animation-name: alr;-moz-backface-visibility: visible !important;-moz-animation-name: alr;-o-backface-visibility: visible !important;-o-animation-name: alr;backface-visibility: visible !important;animation-name: alr;}
 #alertP{padding:12px;background-color: #fff;}
 #alertBtns{text-align:right;}
-#alertBtns a{margin:4px 9px;}
+#alertBtns a{margin:4px 9px;position: static;}
 .info .panlT,.info #alertBtns{display: none;}
 .info #alertP{_display:inline;_zoom:1;height: 48px;padding:0 6px 0 58px;white-space:nowrap;line-height: 48px;background-image: url(<!--#echo var="static"-->images/common/loading.gif);background-repeat: no-repeat;background-position: 6px 50%;margin: 6px;border-radius: 5px}
 .succ #alertP{background-image: url(<!--#echo var="static"-->images/mod/succ.png);}
