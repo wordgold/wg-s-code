@@ -9,6 +9,7 @@ pre{border:1px #ccc solid;border-radius:9px;box-shadow:0 1px 3px #ccc inset}
 script{display:block}
 ol,ul{list-style:none}
 table{border-collapse:collapse;border-spacing:0}
+td{empty-cells:show}
 .cf:before,.cf:after{content:" ";display:table}
 .cf:after{clear:both}
 .cf{*zoom:1}
