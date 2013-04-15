@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
 	require('jquery');
 	require('cookie');
-	require('<!--#echo var="static"-->css/mod/superm.css');	
+	require('<!--#echo var="static"-->css/mod/superm.css');
 	var $superM, $smu, $sma, mod, alertM = require('alert');
 	return {
 		html: {
@@ -361,7 +361,7 @@ define(function(require, exports, module) {
 				});
 			}
 			if (op) {
-				$("#sub" + op.type).prop("checked", true).siblings().prop("checked", false);
+				$("#sub" + op.type).prop("checked", 1).siblings().prop("checked", 0);
 				if (mod.index != "sub") mod.sendInfo(op.t, "info");
 				else return;
 			}
@@ -463,10 +463,10 @@ define(function(require, exports, module) {
 				if (mod.index != "mobile") mod.sendInfo(op.t, "info");
 				else return;
 			}
-			if (mod.index != "mobile"){
+			if (mod.index != "mobile") {
 				mod.openMod("mobile");
 				$("#dymobile").trigger("focus");
-			}else mod.closeMod();
+			} else mod.closeMod();
 		},
 		pk: function(opt) {
 			var pkOpt = mod.pkOpt;
