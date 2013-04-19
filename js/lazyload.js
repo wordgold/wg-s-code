@@ -7,8 +7,15 @@ define(function(require, exports, module) {
 			var $w = $(window),
 				delay = 0;
 			var scrollLoad = function() {
-				if (delay) clearTimeout(delay);
-				setTimeout(function() {
+				if (delay) {
+					clearTimeout(delay);
+					delay = 0;
+				}
+				delay = setTimeout(function() {
+					if (!$list.length) {
+						$w.off('scroll resize', scrollLoad);
+						return;
+					}
 					var h = $w.height() + $w.scrollTop();
 					$list.each(function() {
 						var $t = $(this);
@@ -19,7 +26,7 @@ define(function(require, exports, module) {
 				}, 400)
 			}
 			scrollLoad();
-			$(window).on('scroll resize', scrollLoad);
+			$w.on('scroll resize', scrollLoad);
 		}
 	})
 });
