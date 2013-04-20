@@ -1,15 +1,17 @@
 ﻿@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700);
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,a,em,img,strong,sub,sup,dl,dt,dd,ol,ul,li,form,label,embed,select,input,textarea,pre{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}
 body,input,textarea{font:14px/1.625em 'Droid Serif',Arial,Helvetica,sans-serif;color:#333;word-break:break-all}
-body{padding:3em 9%;background:#f6f6f6}
-h1,h3{font-weight:bold;font-size:24px;line-height:1.625em;margin:1em 0}
+body{padding:0 9%;background:#f6f6f6}
+h1,h3{font-weight:bold;font-size:24px;line-height:1.625em;margin:2em 0 0 0}
 h3{font-size:16px}
 p,pre{margin:9px}
 b{background:#eee;padding:0 2px}
 pre{border:1px #ccc solid;border-radius:9px;box-shadow:0 1px 3px #ccc inset}
-script{display:block}
+pre script{display:block}
 ol,ul{list-style:none}
 table{border-collapse:collapse;border-spacing:0}
+header{padding: 2em 0;border-bottom: 1px #ddd solid}
+footer{text-align: center;margin: 2em;color:#999;}
 .cf:before,.cf:after{content:" ";display:table}
 .cf:after{clear:both}
 .cf{*zoom:1}
