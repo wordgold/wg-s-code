@@ -28,8 +28,8 @@ select:focus,input[type=email]:focus,input[type=search]:focus,input[type=number]
 select{padding:0}
 input{height:2em;_border:1px #d0d0d0 solid}
 textarea{overflow:auto;height:99px}
-a.lightbtn{display:inline-block;padding:2px 9px;border-radius:3px;background:#ddd;text-decoration:none;background:linear-gradient(#eee 60%,#ddd 100%);border:1px #aaa solid;box-shadow:0 1px 2px #ddd;text-shadow:0px 1px 1px #fff;transition:all 0.1s ease-out}
-a.lightbtn:hover{color:#000;text-decoration:none;box-shadow:0 1px 2px #fff;background:#eee;background:linear-gradient(#f3f3f3 20%,#ddd 100%)}
+a.lightbtn{display:inline-block;padding:2px 9px;border-radius:3px;background:#ddd;text-decoration:none;background:linear-gradient(#eee 60%,#ddd 100%);border:1px #aaa solid;box-shadow:0 1px 2px #ddd;text-shadow:0px 1px 1px #fff;color:#333;transition:all 0.1s ease-out}
+a.lightbtn:hover{text-decoration:none;box-shadow:0 1px 2px #fff;background:#eee;background:linear-gradient(#f3f3f3 20%,#ddd 100%)}
 a.lightbtn:active{box-shadow:0 1px 2px #fff,0 1px 2px #ccc inset;background:#ccc;background:linear-gradient(#eee 40%,#d9d9d9 100%)}
 .panlT{text-shadow:0 1px 1px #000;padding:2px 6px;margin:6px;border-radius:3px;background:#555;background:linear-gradient(#999 10%,#666 100%);box-shadow:0 1px 1px #333;color:#fff}
 .panlT .fr{float:right;padding:4px;font-size:24px;margin:-4px 0 0 0;color:#ccc;font-weight:bold;-webkit-transform:rotate(-360deg);-moz-transform:rotate(-360deg);-o-transform:rotate(-360deg);transform:rotate(-360deg);-webkit-transition:-webkit-transform 0.6s ease-out;-moz-transition:-moz-transform 0.6s ease-out;-o-transition:-o-transform 0.6s ease-out;transition:transform 0.6s ease-out}
