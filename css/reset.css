@@ -1,6 +1,6 @@
 ﻿@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700);
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,a,em,img,strong,sub,sup,dl,dt,dd,ol,ul,li,form,label,embed,select,input,textarea,pre{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;text-indent:0}
-body,input,textarea{font:14px/1.625em 'Droid Serif',Arial,Helvetica,sans-serif;color:#333;word-break:break-all}
+body,input,textarea{font:14px/1.625em 'Droid Serif',tahoma,arial,helvetica,sans-serif;color:#333;word-break:break-all}
 body{padding:0 9%;background:#f6f6f6}
 h1,h3{font-weight:bold;font-size:24px;line-height:1.625em;margin:2em 0 0 0}
 h3{font-size:16px}
@@ -29,3 +29,6 @@ select{padding:0}
 input{height:2em;_border:1px #d0d0d0 solid}
 textarea{overflow:auto;height:99px}
 label{cursor:pointer}
+a.lightbtn{display:inline-block;padding:2px 9px;border-radius:3px;background:#ddd;text-decoration:none;background:linear-gradient(#eee 60%,#ddd 100%);border:1px #aaa solid;box-shadow:0 1px 2px #ddd;text-shadow:0px 1px 1px #fff;color:#333;transition:all 0.1s ease-out}
+a.lightbtn:hover{text-decoration:none;box-shadow:0 1px 2px #fff;background:#eee;background:linear-gradient(#f3f3f3 20%,#ddd 100%)}
+a.lightbtn:active{box-shadow:0 1px 2px #fff,0 1px 2px #ccc inset;background:#ccc;background:linear-gradient(#eee 40%,#d9d9d9 100%)}
